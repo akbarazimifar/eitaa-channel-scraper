@@ -1,5 +1,6 @@
 import time
 from typing import Tuple, List
+from logging import getLogger
 
 from requests import Session
 
@@ -7,6 +8,8 @@ from core.config import get_settings
 from scraper import MessageScraper
 from adapters import BaseRepository
 
+
+logger = getLogger(__name__)
 
 SETTINGS = get_settings()
 
@@ -33,6 +36,9 @@ class ChannelCrawler:
         self._repository.create_channel(self.channel_name, info_str)
 
         if self.get_prev_run_offset and self.get_prev_run_offset >= msg_offset:
+            logger.info(
+                f"No new message on channel `{self.channel_name}` since last run"
+            )
             return msg_offset
 
         current_offset = msg_offset
@@ -41,6 +47,7 @@ class ChannelCrawler:
             next_page_offset, messages = self.get_msg_page(current_offset)
             self._repository.add_msg_to_channel(self.channel_name, messages)
 
+            logger.debug(f"next page offset: {next_page_offset}")
             if (
                 not next_page_offset
                 or next_page_offset == 1
@@ -49,6 +56,9 @@ class ChannelCrawler:
                     and next_page_offset <= self.get_prev_run_offset
                 )
             ):
+                logger.info(
+                    f"All messages on channel `{self.channel_name}` collected from beginning to offset {msg_offset}"
+                )
                 break
 
             current_offset = next_page_offset
@@ -77,6 +87,8 @@ class ChannelCrawler:
                     f.truncate()
             else:
                 f.write(str(offset))
+
+            logger.info(f"Offset updated to {offset} for channel {self.channel_name}")
 
     def get_msg_page(self, offset: int) -> Tuple[int, List[str]]:
         return self._scraper.extarct_messages(
