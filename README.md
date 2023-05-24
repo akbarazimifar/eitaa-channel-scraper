@@ -1,4 +1,4 @@
-## Eita channel scraper
+## Eitaa channel scraper
 
 #### Run the app:
 ```
