@@ -9,6 +9,9 @@ class Settings(BaseSettings):
     EITAA_DOMAIN: str = "eitaa.com"
     MESSAGE_FETCH_INTERVAL: int = 3000
 
+    INFO_CONTAINER_SELECTOR: str = ".etme_channel_info"
+    MESSAGE_CONTAINER_SELECTOR: str = ".etme_widget_message_wrap"
+
     LOG_LEVEL: str = "INFO"
 
     class Config:
