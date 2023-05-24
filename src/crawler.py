@@ -41,15 +41,13 @@ class ChannelCrawler:
             )
             return msg_offset
 
-        self.update_channel_offset(msg_offset)
-
         current_offset = msg_offset
         while True:
             time.sleep(SETTINGS.MESSAGE_FETCH_INTERVAL / 1000)
             next_page_offset, messages = self.get_msg_page(current_offset)
             self._repository.add_msg_to_channel(self.channel_name, messages)
 
-            logger.debug(f"next page offset: {next_page_offset}")
+            logger.info(f"next page offset: {next_page_offset}")
             if (
                 not next_page_offset
                 or next_page_offset == 1
