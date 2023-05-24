@@ -1,0 +1,9 @@
+pylava
+pyflakes==2.4.0
+black
+pytest
+pytest-asyncio
+tox>=2.4
+coverage!=4.3
+coveralls
+mypy
