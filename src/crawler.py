@@ -30,7 +30,7 @@ class ChannelCrawler:
 
     def start(self) -> int:
         msg_offset, info_str = self.get_channel_info()
-        self._repository.create_channel(info_str)
+        self._repository.create_channel(self.channel_name, info_str)
 
         if self.get_prev_run_offset and self.get_prev_run_offset >= msg_offset:
             return msg_offset

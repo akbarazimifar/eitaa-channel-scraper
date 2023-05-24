@@ -4,7 +4,7 @@ import abc
 
 class BaseRepository(abc.ABC):
     @abc.abstractmethod
-    def create_channel(self, channel_info: str) -> None:
+    def create_channel(self, channel_name: str, channel_info: str) -> None:
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -12,9 +12,13 @@ class BaseRepository(abc.ABC):
         raise NotImplementedError
 
 
-class SqlRepository(BaseRepository):
-    def create_channel(self, channel_info: str) -> None:
-        pass
+class ConsoleRepository(BaseRepository):
+    def create_channel(self, channel_name: str,channel_info: str) -> None:
+        print(channel_name)
+        print(channel_info)
+        print("###############")
 
     def add_msg_to_channel(self, channel_name: str, msgs: List[str]) -> None:
-        pass
+        print(channel_name)
+        print(msgs)
+        print("###############")

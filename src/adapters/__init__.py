@@ -1,7 +1,7 @@
-from .repository import BaseRepository, SqlRepository
+from .repository import BaseRepository, ConsoleRepository
 
 
 __all__ = (
     "BaseRepository",
-    "SqlRepository",
+    "ConsoleRepository",
 )

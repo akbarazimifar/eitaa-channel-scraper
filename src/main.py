@@ -2,7 +2,7 @@ import logging
 
 import requests
 
-from adapters import SqlRepository
+from adapters import ConsoleRepository
 from crawler import ChannelCrawler
 from scraper import MessageScraper
 
@@ -24,7 +24,7 @@ def main() -> None:
         crawler = ChannelCrawler(
             http_agent=session,
             scraper=MessageScraper(),
-            repository=SqlRepository()
+            repository=ConsoleRepository()
         )
 
         crawler.start()
