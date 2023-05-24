@@ -41,6 +41,8 @@ class ChannelCrawler:
             )
             return msg_offset
 
+        self.update_channel_offset(msg_offset)
+
         current_offset = msg_offset
         while True:
             time.sleep(SETTINGS.MESSAGE_FETCH_INTERVAL / 1000)
