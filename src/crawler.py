@@ -91,15 +91,17 @@ class ChannelCrawler:
             logger.info(f"Offset updated to {offset} for channel {self.channel_name}")
 
     def get_msg_page(self, offset: int) -> Tuple[int, List[str]]:
-        return self._scraper.extarct_messages(
-            self._fetch_msg_page(offset))
+        msg_text = self._fetch_msg_page(offset)
+        return self._scraper.extarct_messages(msg_text)
 
     def get_channel_info(self) -> Tuple[int, str]:
-        return self._scraper.extract_channel_info(
-            self._fetch_channel())
+        chnl_text = self._fetch_channel()
+        return self._scraper.extract_channel_info(chnl_text)
 
     def _fetch_msg_page(self, offset: int) -> str:
-        return self._http_agent.get(f"{self.channel_url}?before={offset}").text
+        resp = self._http_agent.get(f"{self.channel_url}?before={offset}")
+        return resp.text
 
     def _fetch_channel(self) -> str:
-        return self._http_agent.get(self.channel_url).text
+        resp = self._http_agent.get(self.channel_url)
+        return resp.text
