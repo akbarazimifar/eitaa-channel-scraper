@@ -2,8 +2,9 @@ import logging
 import time
 
 import requests
+from pymongo import MongoClient
 
-from adapters import ConsoleRepository
+from adapters import MongoRepository
 from crawler import ChannelCrawler
 from scraper import MessageScraper
 
@@ -25,7 +26,7 @@ def main() -> None:
         crawler = ChannelCrawler(
             http_agent=session,
             scraper=MessageScraper(),
-            repository=ConsoleRepository()
+            repository=MongoRepository(MongoClient(SETTINGS.db_uri))
         )
 
         while True:
