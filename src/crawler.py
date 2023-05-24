@@ -42,8 +42,8 @@ class ChannelCrawler:
             self._repository.add_msg_to_channel(self.channel_name, messages)
 
             if (
-                not next_page_offset 
-                or next_page_offset == 1 
+                not next_page_offset
+                or next_page_offset == 1
                 or (
                     self.get_prev_run_offset
                     and next_page_offset <= self.get_prev_run_offset
@@ -91,4 +91,3 @@ class ChannelCrawler:
 
     def _fetch_channel(self) -> str:
         return self._http_agent.get(self.channel_url).text
-

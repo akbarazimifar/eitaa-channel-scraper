@@ -1,7 +1,5 @@
 from typing import Tuple, List
 
-from bs4 import BeautifulSoup
-
 from core.config import get_settings
 
 SETTINGS = get_settings()
