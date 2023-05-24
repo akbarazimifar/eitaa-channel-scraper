@@ -1,4 +1,5 @@
 import logging
+import time
 
 import requests
 
@@ -27,7 +28,11 @@ def main() -> None:
             repository=ConsoleRepository()
         )
 
-        crawler.start()
+        while True:
+            crawler.start()
+
+            logger.info(f"Channel will be refreshed in {SETTINGS.CHANNEL_REFRESH_INTERVAL / 1000} seconds")
+            time.sleep(SETTINGS.CHANNEL_REFRESH_INTERVAL / 1000)
 
 
 if __name__ == "__main__":

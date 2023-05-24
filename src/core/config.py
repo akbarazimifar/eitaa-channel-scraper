@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     START_MESSAGE_OFFSET: int = 10
     EITAA_DOMAIN: str = "eitaa.com"
     MESSAGE_FETCH_INTERVAL: int = 3000
+    CHANNEL_REFRESH_INTERVAL: int = 60000
 
     INFO_CONTAINER_SELECTOR: str = ".etme_channel_info"
     MESSAGE_CONTAINER_SELECTOR: str = ".etme_widget_message_wrap"
