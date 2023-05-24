@@ -20,6 +20,8 @@ services:
 
       - CHANNELS_COLLECTION=channels
       - MESSAGES_COLLECTION=messages
+
+      - LOG_LEVEL=INFO
     volumes:
       - ./offsets:/src/offsets
     depends_on: 

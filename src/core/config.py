@@ -4,23 +4,23 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    CHANNEL_NAME: str = "world_py"
-    START_MESSAGE_OFFSET: int = 10
-    EITAA_DOMAIN: str = "eitaa.com"
-    MESSAGE_FETCH_INTERVAL: int = 3000
-    CHANNEL_REFRESH_INTERVAL: int = 60000
+    CHANNEL_NAME: str
+    START_MESSAGE_OFFSET: int
+    EITAA_DOMAIN: str
+    MESSAGE_FETCH_INTERVAL: int
+    CHANNEL_REFRESH_INTERVAL: int
 
-    INFO_CONTAINER_SELECTOR: str = ".etme_channel_info"
-    MESSAGE_CONTAINER_SELECTOR: str = ".etme_widget_message_wrap"
+    INFO_CONTAINER_SELECTOR: str
+    MESSAGE_CONTAINER_SELECTOR: str
 
-    MONGO_HOST: str = "localhost"
-    MONGO_PORT: str = "27017"
-    MONGO_USER: str = "user"
-    MONGO_PASSWORD: str = "pass"
-    CHANNELS_COLLECTION: str = "channels"
-    MESSAGES_COLLECTION: str = "messages"
+    MONGO_HOST: str
+    MONGO_PORT: str
+    MONGO_USER: str
+    MONGO_PASSWORD: str
+    CHANNELS_COLLECTION: str
+    MESSAGES_COLLECTION: str
 
-    LOG_LEVEL: str = "INFO"
+    LOG_LEVEL: str
 
     class Config:
         env_file = ".env"
