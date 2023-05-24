@@ -1,0 +1,51 @@
+version: "3.9"  # optional since v1.27.0
+
+services:
+  crawler:
+    image: registry.local:5000/eitaa-crawler:latest
+    build: .
+    environment:
+      - CHANNEL_NAME=${CHANNEL_NAME:-world_py}
+      - START_MESSAGE_OFFSET=${START_MESSAGE_OFFSET:-10}
+      - EITAA_DOMAIN=${EITAA_DOMAIN:-eitaa.com}
+      - MESSAGE_FETCH_INTERVAL=${MESSAGE_FETCH_INTERVAL:-3000}
+      - CHANNEL_REFRESH_INTERVAL=${CHANNEL_REFRESH_INTERVAL:-3600000}
+      - INFO_CONTAINER_SELECTOR=.etme_channel_info
+      - MESSAGE_CONTAINER_SELECTOR=.etme_widget_message_wrap
+
+      - MONGO_HOST=db
+      - MONGO_PORT=27017
+      - MONGO_USER=user
+      - MONGO_PASSWORD=pass
+
+      - CHANNELS_COLLECTION=channels
+      - MESSAGES_COLLECTION=messages
+    volumes:
+      - ./offsets:/src/offsets
+    depends_on: 
+      - db
+
+  db:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: pass
+    volumes:
+      - mongo-data:/data/db
+
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: pass
+      ME_CONFIG_MONGODB_URL: mongodb://user:pass@db:27017/
+    depends_on: 
+      - db
+
+volumes:
+  mongo-data:
