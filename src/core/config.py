@@ -5,7 +5,6 @@ from pydantic import BaseSettings
 
 class Settings(BaseSettings):
     CHANNEL_NAME: str
-    START_MESSAGE_OFFSET: int
     EITAA_DOMAIN: str
     MESSAGE_FETCH_INTERVAL: int
     CHANNEL_REFRESH_INTERVAL: int
